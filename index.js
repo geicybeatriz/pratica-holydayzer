@@ -20,16 +20,19 @@ app.get("/holidays", (request, response) => {
     response.send(holidays);
 });
 
-// app.get("/is-today-holiday", (request, response) => {
-//     const hoje = new Date().toLocaleDateString();
-//     //console.log(hoje.toLocaleDateString()); // 1/1/2022
-//     const feriado = holidays.find(holiday => {
-//         return holiday.date === hoje;
-//     })
+app.get("/is-today-holiday", (request, response) => {
+    const hoje = new Date().toLocaleDateString('en-us');
+    //console.log(hoje.toLocaleDateString('en-us')); // 1/1/2022
+    const feriado = holidays.find(holiday => {
+        return holiday.date === hoje;
+    })
 
-
-
-// })
+    if(feriado){
+        response.send(`Sim, hoje é feriado de ${feriado.name}!`);
+    } else {
+        response.send("Não, hoje não é feriado.");
+    }
+})
 
 app.listen(5000, () => {
     console.log(chalk.bold.green(`Aplicação está funcionando!`))
