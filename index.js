@@ -34,6 +34,18 @@ app.get("/is-today-holiday", (request, response) => {
     }
 })
 
+
+//Bonus: retornar feriados do mês.
+app.get("/holidays/:mes", (request, response) => {
+    const {mes} = request.params;
+    const feriadosDoMes = holidays.filter(holiday => {
+        const numeroMes = holiday.date.split("/")[0];
+        return numeroMes === mes;
+    })
+
+    response.send(feriadosDoMes);
+});
+
 app.listen(5000, () => {
     console.log(chalk.bold.green(`Aplicação está funcionando!`))
 } );
